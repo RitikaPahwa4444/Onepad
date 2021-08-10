@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
@@ -53,39 +55,47 @@ class _OnboardScreenState extends State<OnboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
+      // backgroundColor: background,
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
-              flex: 3,
               child: PageView.builder(
                 controller: _controller,
                 itemCount: splashData.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(children: [
-                    Spacer(flex: 2),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 8,
+                    ),
+                    // Spacer(flex: 1),
                     Padding(
                       padding: EdgeInsets.only(bottom: 10),
-                      child: Helper.text("${(splashData[index]['title'])}", 20,
-                          0, Colors.black),
+                      child:
+                          Helper.text("${(splashData[index]['title'])}", 20, 0),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Container(
                         constraints: BoxConstraints(
                             maxWidth: MediaQuery.of(context).size.width - 100),
-                        child: Helper.text("${(splashData[index]['subtitle'])}",
-                            18, 0, Colors.grey),
+                        child: Helper.text(
+                            "${(splashData[index]['subtitle'])}", 18, 0),
                       ),
                     ),
-                    Spacer(flex: 2),
-                    AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: Image.asset('${(splashData[index]['image'])}',
-                          fit: BoxFit.contain),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 12,
                     ),
-                    Spacer(),
+                    Container(
+                        height: MediaQuery.of(context).size.height / 3,
+                        child: Image.asset('${(splashData[index]['image'])}')),
+                    // Spacer(flex: 1),
+                    // AspectRatio(
+                    //   aspectRatio: 16 / 9,
+                    //   child: Image.asset('${(splashData[index]['image'])}',
+                    //       fit: BoxFit.contain),
+                    // ),
+                    // Spacer(),
                   ]);
                 },
                 onPageChanged: (value) => setState(() {
@@ -93,110 +103,102 @@ class _OnboardScreenState extends State<OnboardScreen> {
                 }),
               ),
             ),
-            Expanded(
-                flex: 1,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(top: 100),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(splashData.length,
-                                (int index) => _buildDots(index: index)),
-                          )),
-                      Spacer(),
-                      SizedBox(
-                          height: 70,
-                          child: _currentPage != 2
-                              ? Padding(
-                                  padding: const EdgeInsets.only(left: 20.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 20.0),
-                                        child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.pushReplacement(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (b) =>
-                                                          SignUpScreen()));
-                                            },
-                                            child: Container(
-                                              child: Center(
-                                                child: Helper.subtext('Skip',
-                                                    14, 0, lighttextcolor),
-                                              ),
-                                              height: 40,
-                                              width: 100,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(40),
-                                                  color: darkcolor),
-                                            )),
+            Padding(
+                padding: EdgeInsets.only(top: 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(splashData.length,
+                      (int index) => _buildDots(index: index)),
+                )),
+            SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+                height: 70,
+                child: _currentPage != 2
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 20.0),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (b) => SignUpScreen()));
+                                  },
+                                  child: Container(
+                                    child: Center(
+                                      child: Text(
+                                        'Skip',
+                                        style: GoogleFonts.ubuntu(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            letterSpacing: 0),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: 30, bottom: 20.0),
-                                        child: GestureDetector(
-                                            onTap: () {
-                                              if (_currentPage == 2) {
-                                                Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (b) =>
-                                                            SignUpScreen()));
-                                              }
-                                              _controller
-                                                  .jumpToPage(++_currentPage);
-                                            },
-                                            child: Container(
-                                              child: Center(
-                                                child: Helper.subtext(
-                                                    'Continue',
-                                                    14,
-                                                    0,
-                                                    darkcolor),
-                                              ),
-                                              height: 50,
-                                              width: 100,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  color: Colors.transparent),
-                                            )),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              : Padding(
-                                  padding: const EdgeInsets.only(bottom: 20.0),
-                                  child: GestureDetector(
-                                      onTap: () {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (b) =>
-                                                    SignUpScreen()));
-                                      },
-                                      child: Container(
-                                        child: Center(
-                                          child: Helper.subtext('Get Started',
-                                              14, 0, lighttextcolor),
-                                        ),
-                                        height: 50,
-                                        width: 300,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(40),
-                                            color: darkcolor),
-                                      )),
-                                ))
-                    ])),
+
+                                      //Helper.subtext('Skip', 14, 0),
+                                    ),
+                                    height: 40,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(40),
+                                        color: darkcolor),
+                                  )),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 30, bottom: 20.0),
+                              child: GestureDetector(
+                                  onTap: () {
+                                    if (_currentPage == 2) {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (b) => SignUpScreen()));
+                                    }
+                                    _controller.jumpToPage(++_currentPage);
+                                  },
+                                  child: Container(
+                                    child: Center(
+                                      child: Helper.subtext('Continue', 14, 0),
+                                    ),
+                                    height: 50,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: Colors.transparent),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (b) => SignUpScreen()));
+                            },
+                            child: Container(
+                              child: Center(
+                                  child: Text('Get Started',
+                                      style: GoogleFonts.ubuntu(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          letterSpacing: 0))),
+                              height: 50,
+                              width: 300,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: darkcolor),
+                            )),
+                      )),
           ],
         ),
       ),
