@@ -1,72 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:onepad/Helpers/helpers.dart';
-import 'package:onepad/Screens/DetailScreen/detailScreen.dart';
 import 'package:onepad/Services/const.dart';
-import 'package:toast/toast.dart';
 
-class NotesVisible extends StatefulWidget {
-  const NotesVisible({Key key}) : super(key: key);
+import 'DetailScreen/detailScreen.dart';
 
-  @override
-  _NotesVisibleState createState() => _NotesVisibleState();
-}
-
-class _NotesVisibleState extends State<NotesVisible> {
-  bool isStarred = false;
+class StarredNotes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            height: 40,
-            child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection('Users')
-                  .doc(Onepad.sharedPreferences.getString('uid'))
-                  .collection('Notes')
-                  .orderBy('time')
-                  .snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else {
-                  return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data.docs.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Container(
-                            width: 90,
-                            decoration: BoxDecoration(
-                                color: Color.fromRGBO(84, 140, 168, 1),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Center(
-                                child: Helper.subtext(
-                                  snapshot.data.docs[index]['title'],
-                                  20,
-                                  0,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      });
-                }
-              },
-            ),
-          ),
           SizedBox(
             height: 20,
           ),
@@ -77,8 +22,7 @@ class _NotesVisibleState extends State<NotesVisible> {
                   stream: FirebaseFirestore.instance
                       .collection('Users')
                       .doc(Onepad.sharedPreferences.getString('uid'))
-                      .collection('Notes')
-                      .orderBy('time')
+                      .collection('Starred')
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.data != null &&
@@ -102,13 +46,6 @@ class _NotesVisibleState extends State<NotesVisible> {
                                 onTap: () {
                                   print(snapshot.data.docs[index]['created']);
                                   print("Onepad");
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (b) => DetailScreen(
-                                                onepad:
-                                                    snapshot.data.docs[index],
-                                              )));
                                 },
                                 child: Stack(
                                   children: [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
+
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/SingupScreen/SignupScreen.dart';
 
@@ -42,7 +42,10 @@ class _OnboardScreenState extends State<OnboardScreen> {
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),
-        color: _currentPage == index ? darkcolor : lightcolor,
+        color: _currentPage == index
+            ? Color.fromRGBO(84, 140, 168, 1)
+            : Colors.grey,
+        // color: _currentPage == index ? darkcolor : lightcolor,
       ),
       margin: const EdgeInsets.only(right: 5),
       height: 10,
@@ -125,7 +128,8 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                       child: Text(
                                         'Skip',
                                         style: GoogleFonts.ubuntu(
-                                            color: Colors.white,
+                                            color:
+                                                Color.fromRGBO(84, 140, 168, 1),
                                             fontSize: 14,
                                             letterSpacing: 0),
                                       ),
@@ -133,8 +137,8 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                     height: 40,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(40),
-                                        color: darkcolor),
+                                      borderRadius: BorderRadius.circular(40),
+                                    ),
                                   )),
                             ),
                             Padding(
@@ -157,8 +161,9 @@ class _OnboardScreenState extends State<OnboardScreen> {
                                     height: 50,
                                     width: 100,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.transparent),
+                                      borderRadius: BorderRadius.circular(40),
+                                      color: Color.fromRGBO(84, 140, 168, 1),
+                                    ),
                                   )),
                             ),
                           ],
@@ -183,8 +188,9 @@ class _OnboardScreenState extends State<OnboardScreen> {
                               height: 50,
                               width: 300,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40),
-                                  color: darkcolor),
+                                color: Color.fromRGBO(84, 140, 168, 1),
+                                borderRadius: BorderRadius.circular(40),
+                              ),
                             )),
                       )),
           ],

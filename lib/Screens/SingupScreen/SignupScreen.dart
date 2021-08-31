@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
+
 import 'package:onepad/Helpers/helpers.dart';
 import 'package:onepad/Screens/Errors/Alert.dart';
 import 'package:onepad/Screens/Info/Gettinginfo.dart';
@@ -89,7 +89,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   width: MediaQuery.of(context).size.width - 100,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage('assets/images/signup.jpg'))),
+                          image: AssetImage('assets/images/signup.png'))),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(40.0),
@@ -99,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                              color: lightcolor.withOpacity(0.2),
+                              color: Color.fromRGBO(84, 140, 168, 1),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             controller: namecontroller,
@@ -112,7 +112,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               prefixIcon: Icon(
                                 Icons.person,
                                 size: 15,
-                                color: darkcolor,
                               ),
                               hintText: 'Username',
                               // hintStyle:
@@ -131,7 +130,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                              color: lightcolor.withOpacity(0.2),
+                              color: Color.fromRGBO(84, 140, 168, 1),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             validator: (val) {
@@ -146,7 +145,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.email,
-                                  color: darkcolor,
                                   size: 15,
                                 ),
                                 hintText: 'Email',
@@ -165,7 +163,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                              color: lightcolor.withOpacity(0.2),
+                              color: Color.fromRGBO(84, 140, 168, 1),
                               borderRadius: BorderRadius.circular(40)),
                           child: TextFormField(
                             controller: passwordcontroller,
@@ -178,7 +176,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 prefixIcon: Icon(
                                   Icons.lock,
                                   size: 15,
-                                  color: darkcolor,
                                 ),
                                 hintText: 'Password',
                                 // hintStyle:
@@ -198,7 +195,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   icon: passwordvisibility
                                       ? Icon(Icons.visibility)
                                       : Icon(Icons.visibility_off),
-                                  color: darkcolor,
                                   iconSize: 15,
                                 )),
                             obscureText: !passwordvisibility,
@@ -215,7 +211,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 60,
                             width: MediaQuery.of(context).size.width / 2,
                             decoration: BoxDecoration(
-                                color: darkcolor,
+                                color: Color.fromRGBO(51, 66, 87, 1),
                                 borderRadius: BorderRadius.circular(40)),
                             child: Center(
                                 child: Text('Sign Up',

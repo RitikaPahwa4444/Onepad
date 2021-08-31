@@ -5,9 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:onepad/Helpers/colorhelper.dart';
 import 'package:onepad/Helpers/helpers.dart';
+import 'package:onepad/Screens/DetailScreen/detailScreen.dart';
 import 'package:onepad/Screens/HomeScreen/homeScreen.dart';
+import 'package:onepad/Screens/Notes/SpeechScreen.dart';
 import 'package:onepad/Services/const.dart';
 import 'package:toast/toast.dart';
 import 'package:path/path.dart';
@@ -95,7 +96,6 @@ class _NotesState extends State<Notes> {
                               MaterialPageRoute(builder: (b) => HomeScreen()));
                         },
                         icon: Icon(Icons.arrow_back_ios),
-                        color: darkcolor,
                         iconSize: 20,
                       ),
                       Spacer(),
@@ -104,7 +104,6 @@ class _NotesState extends State<Notes> {
                           titlecontroller.text.isEmpty
                               ? Toast.show("Give title to your note", context,
                                   duration: Toast.LENGTH_LONG,
-                                  backgroundColor: lightcolor,
                                   textColor: Colors.white,
                                   gravity: Toast.CENTER)
                               : FirebaseFirestore.instance
@@ -127,7 +126,6 @@ class _NotesState extends State<Notes> {
                                   Toast.show(
                                       "Your note has been created!", context,
                                       duration: Toast.LENGTH_LONG,
-                                      backgroundColor: lightcolor,
                                       textColor: Colors.white,
                                       gravity: Toast.BOTTOM);
                                 });
@@ -146,7 +144,6 @@ class _NotesState extends State<Notes> {
                       children: [
                         TextFormField(
                           controller: titlecontroller,
-                          cursorColor: darktextcolor,
                           decoration: InputDecoration.collapsed(
                             hintText: "Title",
                           ),
@@ -161,7 +158,6 @@ class _NotesState extends State<Notes> {
                             padding: const EdgeInsets.only(top: 20.0),
                             child: TextFormField(
                                 controller: subtitlecontroller,
-                                cursorColor: darktextcolor,
                                 decoration: InputDecoration.collapsed(
                                   hintText: 'SubTitle',
                                 ),
@@ -181,7 +177,6 @@ class _NotesState extends State<Notes> {
                               des = val;
                             },
                             maxLines: 18,
-                            cursorColor: darktextcolor,
                             decoration: InputDecoration(
                               focusedBorder: UnderlineInputBorder(
                                   borderSide:
@@ -197,7 +192,8 @@ class _NotesState extends State<Notes> {
                         ),
                         image != null
                             ? Padding(
-                                padding: const EdgeInsets.only(top:20,right: 20.0,bottom: 0),
+                                padding: const EdgeInsets.only(
+                                    top: 20, right: 20.0, bottom: 0),
                                 child: Container(
                                   height:
                                       MediaQuery.of(context).size.height / 2.5,
@@ -220,12 +216,13 @@ class _NotesState extends State<Notes> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top:0,left: 30.0, right: 30),
+                          padding: const EdgeInsets.only(left: 30.0, right: 30),
                           child: Container(
                             height: 60,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40),
-                                color: lightcolor.withOpacity(0.5)),
+                              color: Color.fromRGBO(84, 140, 168, 1),
+                              borderRadius: BorderRadius.circular(40),
+                            ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
@@ -234,13 +231,16 @@ class _NotesState extends State<Notes> {
                                     gallery();
                                   },
                                   icon: Icon(Icons.image),
-                                  color: darkcolor,
                                   iconSize: 25,
                                 ),
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (b) => SpeechScreen()));
+                                  },
                                   icon: Icon(Icons.settings_voice),
-                                  color: darkcolor,
                                   iconSize: 25,
                                 ),
                                 IconButton(
@@ -248,7 +248,6 @@ class _NotesState extends State<Notes> {
                                     camera();
                                   },
                                   icon: Icon(FontAwesomeIcons.camera),
-                                  color: darkcolor,
                                   iconSize: 25,
                                 )
                               ],
@@ -259,7 +258,6 @@ class _NotesState extends State<Notes> {
                     ),
                   ),
                 ),
-                
               ],
             ),
           ),

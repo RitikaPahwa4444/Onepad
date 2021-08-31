@@ -18,7 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 5),
         () => Navigator.pushReplacement(
-
             context,
             MaterialPageRoute(
                 builder: (b) => uid == null ? OnboardScreen() : HomeScreen())));
@@ -39,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               Container(
                 alignment: Alignment.center,
-                height: MediaQuery.of(context).size.height / 1.5,
+                height: MediaQuery.of(context).size.height / 3,
                 child:
                     MediaQuery.of(context).platformBrightness == Brightness.dark
                         ? Image.asset('assets/images/splash2.gif',
